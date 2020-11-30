@@ -4,17 +4,58 @@
 //
 //  Created by Kristoffer Eriksson on 2020-09-25.
 //
-
+import LocalAuthentication
 import UIKit
 
 class ViewController: UICollectionViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var people = [Person]()
+    var hidden = [Person]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        //load()
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewPerson))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "unlock", style: .plain, target: self, action: #selector(unlock))
+        
+    }
+    // remember to add Face id privacy to info.plist
+    @objc func unlock(_ sender: Any){
+        let context = LAContext()
+        var error: NSError?
+        
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error){
+            let reason = "Identify Yourself!"
+            
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) {
+                [weak self] success, authenticationError in
+                DispatchQueue.main.async {
+                    if success {
+                        self?.unlockImages()
+                    } else {
+                        // error
+                        let ac = UIAlertController(title: "Authentication Failed", message: "You could not be verified, pls try again", preferredStyle: .alert)
+                        ac.addAction(UIAlertAction(title: "OK", style: .default))
+                        
+                        self?.present(ac, animated: true)
+                        
+                    }
+                }
+                
+            }
+        } else {
+            //no biometrics
+            let ac = UIAlertController(title: "Biometry not available", message: "Your device does not have biometric notification", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        }
+    }
+    
+    func unlockImages(){
+        
+        load()
+        collectionView.reloadData()
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -95,6 +136,7 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
         
         let person = Person(name: "Unknown", image: imageName)
         people.append(person)
+        save()
         collectionView.reloadData()
         
         dismiss(animated: true)
@@ -105,6 +147,35 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }
+    
+    //save and load with userdefaults / keywrapper didnt work on array
+    func save() {
+        let jsonEncoder = JSONEncoder()
+        
+        if let savedData = try? jsonEncoder.encode(people) {
+            let defaults = UserDefaults.standard
+            defaults.set(savedData, forKey: "people")
+        }
+        else {
+            print("Failed to save people")
+        }
+    }
+    
+    func load (){
+        let defaults = UserDefaults.standard
+                
+        if let savedPeople = defaults.object(forKey: "people") as? Data {
+            let jsonDecoder = JSONDecoder()
+                do {
+                
+                people = try jsonDecoder.decode([Person].self, from: savedPeople)
+            }
+            catch {
+                print("Failed to load people")
+            }
+        }
+    }
+    
     
 }
 

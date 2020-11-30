@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="E40-kN-kqc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="E40-kN-kqc">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,7 +11,7 @@
         <scene sceneID="7vi-J1-KWt">
             <objects>
                 <collectionViewController id="Pye-fx-uwV" customClass="ViewController" customModule="project_10" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="bLg-nW-IyZ">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" dataMode="prototypes" id="bLg-nW-IyZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemIndigoColor"/>
@@ -30,13 +30,13 @@
                                     <rect key="frame" x="0.0" y="0.0" width="140" height="180"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nMb-8k-JRf">
-                                            <rect key="frame" x="10" y="10" width="120" height="120"/>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="nMb-8k-JRf">
+                                            <rect key="frame" x="12" y="12" width="116" height="116"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PnW-8l-4xe">
-                                            <rect key="frame" x="12" y="134" width="120" height="40"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PnW-8l-4xe">
+                                            <rect key="frame" x="12" y="138" width="116" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="16"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -45,6 +45,14 @@
                                     </subviews>
                                 </view>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="nMb-8k-JRf" firstAttribute="centerX" secondItem="Zdv-Nb-8Js" secondAttribute="centerX" id="LDv-Su-AgQ"/>
+                                    <constraint firstItem="nMb-8k-JRf" firstAttribute="top" secondItem="Zdv-Nb-8Js" secondAttribute="topMargin" constant="2" id="LiV-HV-NiU"/>
+                                    <constraint firstItem="nMb-8k-JRf" firstAttribute="leading" secondItem="PnW-8l-4xe" secondAttribute="leading" id="NeW-82-aO1"/>
+                                    <constraint firstItem="nMb-8k-JRf" firstAttribute="leading" secondItem="Zdv-Nb-8Js" secondAttribute="leadingMargin" constant="4" id="au3-z2-KRI"/>
+                                    <constraint firstItem="nMb-8k-JRf" firstAttribute="trailing" secondItem="PnW-8l-4xe" secondAttribute="trailing" id="lJN-zJ-nUH"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="PnW-8l-4xe" secondAttribute="bottom" constant="2" id="wrS-PQ-rzO"/>
+                                </constraints>
                                 <size key="customSize" width="140" height="180"/>
                                 <connections>
                                     <outlet property="imageView" destination="nMb-8k-JRf" id="HQc-Pg-JCs"/>
